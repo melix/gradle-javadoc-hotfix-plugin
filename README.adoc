@@ -1,0 +1,58 @@
+Javadoc Hotfix Gradle Plugin
+=========================
+:vulnerability-url: http://www.kb.cert.org/vuls/id/225657
+
+image:https://travis-ci.org/melix/gradle-javadoc-hotfix-plugin.png?branch=master["Build Status", link="https://travis-ci.org/melix/gradle-javadoc-hotfix-plugin"]
+
+This plugin is an answer to the Javadoc vulnerability issue that has been fixed in JDK 1.7.0u25, as described {vulnerability-url}[here].
+
+
+== Installation
+
+Use the following snippet inside a Gradle build file
+
+[source,groovy]
+----
+buildscript {
+    repositories {
+        mavenRepo name: 'Bintray Javadoc Hotfix repo', url: 'http://dl.bintray.com/melix/gradle-javadoc-hotfix-plugin'
+        mavenRepo name: 'Bintray JCenter', url: 'http://jcenter.bintray.com'
+    }
+
+    dependencies {
+        classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
+    }
+}
+
+apply plugin: 'javadocHotfix'
+----
+
+== Usage
+
+The plugin transparently patches the generated javadoc, as well as groovydoc, but options are available through the
+`javadocHotfix` extension:
+
+[source,groovy]
+----
+javadocHotfix {
+    recursive = true // true by default, patches all file recursively in the javadoc directory
+    check = false // false by default, meaning javadocs are patched. If check=true, only reports vulnerable files
+}
+----
+
+This plugin does not apply to all projects by default, so if you have a multi-project build, use the following code:
+
+[source,groovy]
+----
+allprojects {
+    apply plugin: 'javadocHotfix'
+}
+----
+
+== History
+
+=== 0.1
+
+ * First release.
+ * Patch javadoc
+ * Patch groovydoc
