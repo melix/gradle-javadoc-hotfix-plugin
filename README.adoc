@@ -1,5 +1,5 @@
 Javadoc Hotfix Gradle Plugin
-=========================
+============================
 :vulnerability-url: http://www.kb.cert.org/vuls/id/225657
 
 image:https://travis-ci.org/melix/gradle-javadoc-hotfix-plugin.png?branch=master["Build Status", link="https://travis-ci.org/melix/gradle-javadoc-hotfix-plugin"]
