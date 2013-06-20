@@ -5,6 +5,10 @@ configurations {
     deployerJars
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-webdav:1.0-beta-2',
             'org.apache.maven:maven-ant-tasks:2.1.0'
@@ -21,7 +25,10 @@ uploadArchives {
         deployer = mavenDeployer {
             name = 'bintrayDeployer'
             configuration = configurations.deployerJars
-            repository(url: bintrayReleaseUrl) {
+            snapshotRepository(url: 'http://oss.jfrog.org/artifactory/oss-snapshot-local') {
+                authentication(userName: bintrayUsername, password: bintrayPassword)
+            }
+            repository(url: 'http://oss.jfrog.org/artifactory/oss-release-local') {
                 authentication(userName: bintrayUsername, password: bintrayPassword)
             }
         }
